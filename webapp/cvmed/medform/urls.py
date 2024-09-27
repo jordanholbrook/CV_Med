@@ -5,5 +5,5 @@ from . import views
 urlpatterns = [
     path('', views.medcv, name='medcv'),
     path('demographic/<int:pk>', views.demographic, name='demographic'),
-    path('output', views.output, name='output')
+    path('output/<int:pk>', views.output, name='output')
 ]

@@ -3,12 +3,12 @@ from django.db import models
 # Create your models here.
 
 GENDER_CHOICES = (
-    ('Male','Male'),
-    ('Female', 'Female')
+    ('M','M'),
+    ('F', 'F')
 )
 
 MODEL_CHOICES = (
-    ('pneumonia','pneumonia'),
+    ('xray','xray'),
     ('dermatology','dermatology')
 )
 
@@ -20,7 +20,8 @@ class ImageClassification(models.Model):
     created = models.DateField(auto_now_add=True)
 
 class DemogrphicScore(models.Model):
-    image = models.ForeignKey(ImageClassification, on_delete=models.CASCADE)
+    model = models.ForeignKey(ImageClassification, on_delete=models.CASCADE)
     age = models.IntegerField(max_length=2)
     gender = models.CharField(choices=GENDER_CHOICES, max_length=6)
     zip = models.IntegerField(max_length=5)
+    score = models.FloatField()

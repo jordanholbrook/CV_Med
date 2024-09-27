@@ -33,9 +33,9 @@ import torch.nn as nn
 import torch.optim as optim
 
 
-n_channels = 3
-n_classes = 7
-task = 'multi-class'
+n_channels = 1
+n_classes = 2
+task = 'binary-class'
 
 class Net(nn.Module):
     def __init__(self, in_channels, num_classes):
@@ -88,32 +88,32 @@ class Net(nn.Module):
 # Function to preprocess an individual image
 def preprocess_image(image_path):
     img = Image.open(image_path)  # Open the image
-    img = data_transform(img) 
-    img = img.unsqueeze(0)    # Apply the transformation    img = img.unsqueeze(0)        # Add batch dimension (1, C, H, W)
+    img = data_transform(img)     # Apply the transformations
+    img = img.unsqueeze(0)        # Add batch dimension (1, C, H, W)
     return img
 
-# Load the model's state_dict into the same model architecture
-loaded_model = Net(in_channels=n_channels, num_classes=n_classes)  # Initialize the model architecture
-loaded_model.load_state_dict(torch.load('../models/derma_model.pth'))  # Load the saved parameters
-loaded_model.eval()
+# # Load the model's state_dict into the same model architecture
+# loaded_model = Net(in_channels=n_channels, num_classes=n_classes)  # Initialize the model architecture
+# loaded_model.load_state_dict(torch.load('../models/xray_model.pth'))  # Load the saved parameters
+# loaded_model.eval()
 
 
+# # Define the transformations (same as during training)
 data_transform = transforms.Compose([
-    transforms.Grayscale(num_output_channels=3),  # Convert grayscale to RGB (3 channels)
-    transforms.Resize((28, 28)),  # Resize image
-    transforms.ToTensor(),  # Convert image to a tensor
-    transforms.Normalize(mean=[0.5], std=[0.5])  # Normalize for 3 channels
+    transforms.Grayscale(num_output_channels=1),  # Convert the image to grayscale
+    transforms.Resize((28, 28)),  # Resize image to the size your model expects
+    transforms.ToTensor(),        # Convert image to a tensor
+    transforms.Normalize(mean=[0.5], std=[0.5])  # Normalize using the same mean and std from training
 ])
 
+# # Example usage with a file path to the uploaded image
+# image_path = '../med_images/xray/unnamed-2.jpg'  # Replace with the actual file path
+# preprocessed_img = preprocess_image(image_path)
 
-# Example usage with a file path to the uploaded image
-image_path = '../med_images/skin/skin_image_1.png'  # Replace with the actual file path
-preprocessed_img = preprocess_image(image_path)
+# # Make prediction
+# with torch.no_grad():
+#     output = loaded_model(preprocessed_img)  # Get model output
+#     _, predicted_class = torch.max(output, 1)  # Get predicted class
 
-# Make prediction
-with torch.no_grad():
-    output = loaded_model(preprocessed_img)  # Get model output
-    _, predicted_class = torch.max(output, 1)  # Get predicted class
-
-# Print the predicted class
-print(f"Predicted class: {predicted_class.item()}")
+# # Print the predicted class
+# print(f"Predicted class: {predicted_class.item()}")

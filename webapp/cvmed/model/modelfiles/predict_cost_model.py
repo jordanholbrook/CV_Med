@@ -48,9 +48,9 @@ input_data = pd.DataFrame({
     'Diagnosis': ['melanoma']
 })
 
-loaded_model = joblib.load('../models/medical_cost_predictor_model_v3.pkl')
+# loaded_model = joblib.load('../models/medical_cost_predictor_model_v3.pkl')
 #print("Model loaded successfully.")
 
 # Make predictions with the loaded model
-predicted_cost = loaded_model.predict(input_data)
-print(f"Predicted medical cost: {predicted_cost[0]}")
+# predicted_cost = loaded_model.predict(input_data)
+# print(f"Predicted medical cost: {predicted_cost[0]}")
