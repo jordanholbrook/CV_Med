@@ -33,7 +33,8 @@ from medmnist import INFO, Evaluator, DermaMNIST
 
 # COMMAND ----------
 
-data_flag = dbutils.widgets.get("data_flag")
+#data_flag = dbutils.widgets.get("data_flag")
+data_flag = "dermamnist"
 download = True
 
 NUM_EPOCHS = 3
@@ -198,6 +199,11 @@ def test(split):
 print('==> Evaluating ...')
 test('train')
 test('test')
+
+# COMMAND ----------
+
+torch.save(model.state_dict(), 'derma_model.pth')
+print("Model saved!")
 
 # COMMAND ----------
 
