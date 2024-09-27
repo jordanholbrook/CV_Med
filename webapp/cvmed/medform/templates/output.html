@@ -25,23 +25,30 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col-8">
-                        <h3 class="mb-0">Add Image </h3>
+                        <h3 class="mb-0">Estimated Cost and Diagnosis </h3>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form id="myForm" action="{% url 'medcv' %}" method="POST" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <div class="pl-lg-4">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="file" id="input-address" class="form-control" name="image" accept="image/*" required>
-                                    </div>
+                    <div class="pl-lg-8">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-address">Likley Diagnosis</label>
+                                    <input id="input-address" class="form-control" placeholder="Age" value="88" type="text" readonly>
                                 </div>
                             </div>
-                            <button class="btn btn-info" type="submit">Classify Image</button>
-                        </div>  
-                    </form>
+                        </div>
+                    </div>
+                    <div class="pl-lg-8">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-address">Expected Spend</label>
+                                    <input id="input-address" class="form-control" placeholder="Gender" value="Female" type="text" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
